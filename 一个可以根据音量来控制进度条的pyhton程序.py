@@ -88,21 +88,21 @@ def start_monitoring():
 def toggle_monitoring():
     global monitoring
     if monitoring:
-        monitoring = False; toggle_button.config(text="Start Monitoring")
+        monitoring = False; toggle_button.config(text="开始监控")
     else:
-        monitoring = True; Thread(target=start_monitoring, daemon=True).start(); toggle_button.config(text="Stop Monitoring")
+        monitoring = True; Thread(target=start_monitoring, daemon=True).start(); toggle_button.config(text="停止监控")
 # 初始化GUI
-root = tk.Tk(); root.title("Volume Monitor")
-tk.Label(root, text="Volume Increment Step (%):").pack(pady=5)
+root = tk.Tk(); root.title("音量监视器")
+tk.Label(root, text="体积增量步长 (%):").pack(pady=5)
 increment_step_entry = tk.Entry(root); increment_step_entry.pack(pady=5); increment_step_entry.insert(0, str(volume_increment_step))
 # 更新音量步长
 def update_increment_step():
     global volume_increment_step
     volume_increment_step = int(increment_step_entry.get())
 # 更新按钮和监控切换按钮
-update_button = tk.Button(root, text="Update Increment Step", command=update_increment_step)
+update_button = tk.Button(root, text="更新增量步长", command=update_increment_step)
 update_button.pack(pady=10)
-toggle_button = tk.Button(root, text="Start Monitoring", command=toggle_monitoring)
+toggle_button = tk.Button(root, text="开始监控", command=toggle_monitoring)
 toggle_button.pack(pady=10)
 tk.Button(root, text="Exit", command=root.quit).pack(pady=10)
 root.after(100, process_queue)  # 定期处理队列中的命令
